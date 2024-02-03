@@ -28,19 +28,6 @@ def verify_os
   end
 end
 
-class Command
-  def initialize(cmd)
-  end
-
-  def versioned?(version)
-    @success && @stdout == version
-  end
-
-  def inspect
-    @cmd
-  end
-end
-
 module Minitest::Assertions
   def assert_version(cmd, version)
     _, stdout, stderr, wait_thr = Open3.popen3(cmd)
@@ -55,8 +42,8 @@ end
 String.infect_an_assertion :assert_version, :must_have_version, :only_one_argument
 
 VERIFICATIONS = {
-  "golang"        => ['go version',    '1.7.4'],
-  "java compiler" => ['java -version', '1.7'],
+  "golang"        => ['go version',    '1.21.6'],
+  "java compiler" => ['java -version', '21.0.2'],
 }
 
 verify_os
@@ -64,7 +51,7 @@ verify_os
 VERIFICATIONS.each do |name, (cmd, version)|
   describe name do
     it "has version #{version}" do
-      cmd.must_have_version version
+      expect(cmd).must_have_version version
     end
   end
 end
