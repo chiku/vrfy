@@ -42,7 +42,7 @@ end
 String.infect_an_assertion :assert_version, :must_have_version, :only_one_argument
 
 VERIFICATIONS = {
-  "golang"        => ['go version',    '1.21.6'],
+  "golang"        => ['go version',    '1.26.3'],
   "java compiler" => ['java -version', '21.0.2'],
 }
 
